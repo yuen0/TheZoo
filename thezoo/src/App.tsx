@@ -1,9 +1,16 @@
 import React from "react";
 import "./App.css";
-import { getAnimals } from "./components/Animals";
+import { Outlet } from "react-router-dom";
 
 function App() {
-	return <button onClick={getAnimals}>Get Animals</button>;
+	return (
+		<>
+			<section className="app">
+				<header className="header"></header>
+				<Outlet />
+			</section>
+		</>
+	);
 }
 
 export default App;
