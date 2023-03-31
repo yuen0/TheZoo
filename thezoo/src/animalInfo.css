@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.animal-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	padding: 50px;
+	background-color: rgb(183, 254, 216);
+}
+
+.animal-image {
+	width: 500px;
+}
+
+.animal-desc {
+	font-weight: lighter;
+}
+
+.animal-name {
+	font-size: 2em;
+}

@@ -7,25 +7,6 @@ import { getAnimals } from "../../services/animalService";
 import "./animals.css";
 
 export default function Animals() {
-	// const [animals, setAnimals] = useState(
-	// 	JSON.parse(String(localStorage.getItem("animals")))
-	// );
-
-	// useEffect(() => {
-	// 	const storedData = JSON.parse(String(localStorage.getItem("animals")));
-
-	// 	if (!storedData) {
-	// 		axios.get("https://animals.azurewebsites.net/api/animals").then((res) => {
-	// 			setAnimals(res.data);
-	// 			localStorage.setItem("animals", JSON.stringify(res.data));
-	// 		});
-	// 	}
-	// });
-
-	// if (!animals) {
-	// 	return <></>;
-	// }
-
 	const [animals, setAnimals] = useState<iAnimals[]>([]);
 
 	useEffect(() => {
@@ -34,7 +15,7 @@ export default function Animals() {
 			setAnimals(animalsData);
 		};
 
-		if (animals.length > 0) {
+		if (animals.length <= 0) {
 			data();
 		}
 	});
@@ -53,7 +34,9 @@ export default function Animals() {
 			<p className="short-desc">{animal.shortDescription}</p>
 			<p className="birth">Född: {animal.yearOfBirth}</p>
 
-			<button className="info-btn">Mer om {animal.name}</button>
+			<Link to={`/animals/${animal.id}`}>
+				<button className="info-btn">Mer om {animal.name}</button>
+			</Link>
 		</article>
 	));
 
