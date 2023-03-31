@@ -1,0 +1,39 @@
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5%;
+	background-color: rgb(254, 194, 172);
+}
+
+.image {
+	padding: 50px;
+	width: 500px;
+}
+
+.name {
+	font-weight: bold;
+	font-size: 2em;
+	margin: 0;
+}
+
+.short-desc {
+}
+
+.birth {
+	font-weight: bold;
+}
+
+.info-btn {
+	padding: 10px 20px 10px 20px;
+	margin: 10px;
+	font-weight: bold;
+}

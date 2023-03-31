@@ -1,9 +1,10 @@
 import axios from "axios";
-import iAnimals from "../models/IAnimals";
+import iAnimals from "../../models/IAnimals";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getLS, saveLS } from "./LocalStorage";
-import { getAnimals } from "../services/animalService";
+import { getLS, saveLS } from "../LocalStorage";
+import { getAnimals } from "../../services/animalService";
+import "./animals.css";
 
 export default function Animals() {
 	// const [animals, setAnimals] = useState(
@@ -50,7 +51,7 @@ export default function Animals() {
 			<img className="image" src={animal.imageUrl} alt="not found" />
 			<p className="name">{animal.name}</p>
 			<p className="short-desc">{animal.shortDescription}</p>
-			<p className="birth">{animal.yearOfBirth}</p>
+			<p className="birth">Född: {animal.yearOfBirth}</p>
 
 			<button className="info-btn">Mer om {animal.name}</button>
 		</article>

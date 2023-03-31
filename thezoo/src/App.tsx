@@ -6,7 +6,7 @@ function App() {
 	return (
 		<>
 			<section className="app">
-				<header className="header"></header>
+				<header className="header">Hem</header>
 				<Outlet />
 			</section>
 		</>
