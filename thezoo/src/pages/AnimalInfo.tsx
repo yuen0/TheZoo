@@ -1,46 +1,38 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getLS, saveLS, fedGetLS, fedSaveLS } from "../components/LocalStorage";
+import { getLS, saveLS } from "../components/LocalStorage";
 import iAnimals from "../models/IAnimals";
 import "../animalInfo.css";
 
 export default function AnimalInfo() {
 	const params = useParams() as { id: string };
 	const [animals, setAnimals] = useState<iAnimals[]>([]);
-	const [time, setTime] = useState("");
 
 	useEffect(() => {
-		const animalsLS = getLS();
-		setAnimals(animalsLS);
-
-		// const fedLS = fedGetLS();
-		// setTime(fedLS);
+		setAnimals(getLS());
 	}, []);
 
-	const currentAnimal = animals.find(
-		(animal) => animal.id === Number(params.id)
-	);
+	const current = animals.find((animal) => animal.id === +params.id) || null;
+
+	if (!current) {
+		return <article>Djuret är inte tillgängligt</article>;
+	}
 
 	const handleClick = () => {
 		const time = Date.now();
 		const now = new Date(time);
-		const lastFedDate = new Date().toString();
 		const today = now.toISOString();
 
 		const updateAnimal = animals.map((animal) => {
-			if (animal.id === currentAnimal?.id) {
+			if (animal.id === current!.id) {
 				return {
 					...animal,
 					isFed: true,
 					lastFed: today,
 				};
 			}
-
-			setTime(lastFedDate);
 			return animal;
 		});
-
 		saveLS(updateAnimal);
 		setAnimals(updateAnimal);
 	};
@@ -48,17 +40,25 @@ export default function AnimalInfo() {
 	return (
 		<>
 			<section className="animal-container">
-				<img className="animal-image" src={currentAnimal?.imageUrl} alt="" />
-				<h1 className="animal-name">{currentAnimal?.name}</h1>
-				<p className="animal-desc">{currentAnimal?.longDescription}</p>
-				<p className="animal-fedTime">Senast matad: {time}</p>
-				<button
-					className="animal-feed-btn"
-					disabled={currentAnimal?.isFed}
-					onClick={handleClick}
-				>
-					{`Mata ${currentAnimal?.name}`}
-				</button>
+				<img className="animal-image" src={current.imageUrl} alt="not found" />
+				<h1 className="animal-name">{current.name}</h1>
+				<p className="animal-desc">{current.longDescription}</p>
+				<p className="animal-fedTime">Senast matad: {current.lastFed}</p>
+
+				{current.isFed ? (
+					<button
+						className="animal-feed-btn"
+						onClick={handleClick}
+						disabled={current.isFed}
+					>
+						Nyligen matad
+					</button>
+				) : (
+					<button className="animal-feed-btn" onClick={handleClick}>
+						{" "}
+						{`Mata ${current.name}`}
+					</button>
+				)}
 			</section>
 		</>
 	);

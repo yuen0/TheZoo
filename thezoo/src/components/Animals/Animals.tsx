@@ -1,4 +1,3 @@
-import axios from "axios";
 import iAnimals from "../../models/IAnimals";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -28,7 +27,7 @@ export default function Animals() {
 	let animalsLS: iAnimals[] = getLS();
 
 	const renderAnimals = animalsLS.map((animal) => (
-		<article className="container">
+		<article key={animal.id} className="container">
 			<img className="image" src={animal.imageUrl} alt="not found" />
 			<p className="name">{animal.name}</p>
 			<p className="short-desc">{animal.shortDescription}</p>
